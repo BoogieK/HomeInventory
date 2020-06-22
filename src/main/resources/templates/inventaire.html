@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Inventory</title>
+		<link rel="stylesheet" th:href="@{/styles.css}" />
+	</head>
+	<body>
+		<form method="POST" th:action="@{/logout}">
+			<input class="button" id="logout" type="submit" value="Logout"/>
+		</form>
+		<p id="add"> Adding to inventory
+			<button class="button"><a th:href="@{/add}">Add</a></button>
+		</p>
+		<p id="substraction"> Remove from inventory
+			<button class="button"><a th:href="@{/delete}">Delete</a></button>
+		</p>
+		<p id="research"> Product search
+			<button class="button"><a th:href="@{/search}">Search</a></button>
+		</p>
+		<div class="display">
+			<div class="displayText">
+				<h1>Inventory</h1>
+				<table>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Quantity</th>
+						<th>Canned</th>
+						<th>Type</th>
+						<th>Update</th>
+					</tr>
+					<tr th:each="product: ${products}">
+						<form method="POST" th:action="@{/id}">
+							<td th:text = "${product.id}"/>
+							<td th:text = "${product.name}"/>
+							<td th:text = "${product.quantity}"/>
+							<td th:text = "${product.can}"/>
+							<td th:text = "${product.type.displayValue}"/>
+							<td>
+								<input name="id" type="hidden" th:value="${product.id}" />
+								<button type="submit" name ="Substraction" value="substraction"></button>
+								<button type="submit" name ="Add" value="add"></button>
+							</td>
+						</form>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

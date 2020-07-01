@@ -103,4 +103,8 @@ public class ProductService {
 		
 	}
 
+	public void deleteProductById(Long id) {
+		productRepo.deleteById(id);
+	}
+
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Deleting product</title>
+	<link rel="stylesheet" th:href="@{../css/styles.css}" />
+</head>
+<body>
+	<button class="button">
+		<a th:href="@{/inventory}">Back</a>
+	</button>
+	<h1>Deleting product</h1>
+	<form method="POST" th:action="@{/delete}">
+		<label for="name">Name: </label>
+		<input type="text" name="name"/><br/>
+		<input class="submit" type="submit" value="Delete"/>
+	</form>
+</body>
+</html>

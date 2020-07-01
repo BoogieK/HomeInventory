@@ -73,5 +73,26 @@ public class ProductController {
 		return "add";
 		
 	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/delete")
+	public String formToDeleteProduct(){
+		return "delete";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/delete")
+	public String deleteProduct(String name) {
+		
+		Long id = productService.findByName(name);
+		
+		if(id == null){
+			System.out.println("Couldn't find product to delete.");
+			
+		}
+		else
+		{
+			productService.deleteProductById(id);
+		}
+		return "delete";
+	}
 
 }

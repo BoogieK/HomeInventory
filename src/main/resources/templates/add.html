@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Adding product</title>
+	<link rel="stylesheet" th:href="@{../css/styles.css}" />
+</head>
+<body>
+	<button class="button">
+		<a th:href="@{/inventory}">Back</a>
+	</button>
+	<h1>Adding product:</h1>
+	<form method="POST" th:object="${product}" th:action="@{/add}">
+		<label for="name">Name: </label>
+		<input type="text" name="name"/><br/>
+		<label for="quantity">Quantity: </label>
+		<input type="text" name="quantity"/><br/>
+		<label for="can">Can: </label>
+		<input type="text" name="can"/><br/>
+		<label for="type">Product type: </label>
+		<select name="type" th:value="${type}">
+<!-- 		${T(inventory.Type).values()} shows where to find Type class (all packages before) -->
+			<option th:each="type : ${T(inventory.Type).values()}" th:value="${type}" th:text="${type.displayValue}"></option>
+		</select>
+		<br/>
+    	<input class="submit" type="submit" value="Add"/>
+	</form>
+</body>
+</html>

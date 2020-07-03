@@ -1,5 +1,6 @@
 package inventory.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,6 @@ public class ProductController {
         products = productService.uiInventory();
         model.addAttribute("products", products);
         return "inventory";
-
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{id}")
@@ -53,7 +53,6 @@ public class ProductController {
         // Given name + array
         model.addAttribute("products", products);
         return "inventory";
-
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
@@ -111,6 +110,29 @@ public class ProductController {
             productService.deleteProductById(id);
         }
         return "delete";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/search")
+    public String formToSearchProducts() {
+        return "search";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/search")
+    public String searchProducts(Model model, Type type) {
+
+        List<Product> foundProducts = new ArrayList<>();
+
+        products = productService.uiInventory();
+
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getType().equals(type)) {
+                foundProducts.add(products.get(i));
+            }
+        }
+
+        model.addAttribute("foundProducts", foundProducts);
+
+        return "search";
     }
 
 }

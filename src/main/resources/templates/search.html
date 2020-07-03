@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Searching products</title>
+	<link rel="stylesheet" th:href="@{../css/styles.css}" />
+</head>
+<body>
+<button class="button">
+		<a th:href="@{/inventory}">Back</a>
+	</button>
+	<h1>Search products by category: </h1>
+	<form method="POST" th:object="${product}" th:action="@{/search}">
+		
+		<select name="type" th:value="${type}">
+ 			<option th:each="type : ${T(inventory.Type).values()}" th:value="${type}" th:text="${type.displayValue}"></option>
+ 			<input name="id" type="hidden" th:value="${type}" />
+    	</select>
+    	<input class="submit" type="submit" value="Go"/>
+	</form>
+	
+	<div class=display>
+			<div class=displayText>
+		 		<h1>Inventory</h1>
+		 		<table>
+			 		<tr>
+					    <th>id</th>
+					    <th>Name</th>
+					    <th>Quantity</th>
+					    <th>Canned</th>
+					    <th>Type</th>
+					 </tr>
+					 <tr th:each="foundProducts: ${foundProducts}">
+					 	<form method="POST" th:action="@{/id}">
+					 		<td th:text="${foundProducts.id}" />
+					        <td th:text="${foundProducts.name}" />
+					        <td th:text="${foundProducts.quantity}"/>
+					        <td th:text="${foundProducts.can}" />
+					        <td th:text="${foundProducts.type.displayValue}" />
+<!-- 					        <td> -->
+<!-- 					        	<input name="id" type="hidden" th:value="${produitsTrouves.id}" /> -->
+<!-- 					        	<button type="submit" name="Soustraction" value="soustraire">-</button> -->
+<!-- 					        	<button type="submit" name="Addition" value="addition">+</button> -->
+<!-- 					        </td> -->
+						</form>	
+			    	</tr>
+		    	</table>
+    		</div>
+    	</div>
+</body>
+</html>

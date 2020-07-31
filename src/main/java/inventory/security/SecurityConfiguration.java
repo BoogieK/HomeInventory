@@ -24,8 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/inventory").hasRole("USER").antMatchers("/add").hasRole("USER")
-                .antMatchers("/delete").hasRole("USER").antMatchers("/search").hasRole("USER").antMatchers("/")
-                .permitAll().and().formLogin();
+                .antMatchers("/delete").hasRole("USER").antMatchers("/search").hasRole("USER").and().formLogin()
+                .loginPage("/login").permitAll().defaultSuccessUrl("/inventory", true);
     }
 
     // Uses clear text passwords... Good for testing but not for production
